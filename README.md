@@ -1,9 +1,9 @@
-![Edgeberry Banner](https://raw.githubusercontent.com/Edgeberry/.github/main/brand/EdgeBerry_banner_device_software.png)
+![Freya banner](https://github.com/Freya-Vivariums/.github/blob/main/documentation/Freya_banner.png)
 
-The user interface for the [Edgeberry Device Software](https://github.com/Edgeberry/Edgeberry).
+The user interface for the [Freya Vivarium Control System Core](https://github.com/Freya-Vivariums/Freya-core) application.
 
 ## License & Collaboration
-**Copyright© 2024 Sanne 'SpuQ' Santens**. The Edgeberry device software is licensed under the **[GNU GPLv3](LICENSE.txt)**. The [Rules & Guidelines](https://github.com/Edgeberry/.github/blob/main/brand/Edgeberry_Trademark_Rules_and_Guidelines.md) apply to the usage of the Edgeberry™ brand.
+**Copyright© 2024 Sanne 'SpuQ' Santens**. This project is licensed under the **[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)**. However, trademark rules apply to the usage of the Freya™ brand.
 
 ### Collaboration
 
