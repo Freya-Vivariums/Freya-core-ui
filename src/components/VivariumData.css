@@ -1,0 +1,41 @@
+.liveDataCardContainer{
+    padding: 3px;
+    display: inline-block;              /* Cards next to each other */
+}
+
+.card.liveData{
+    color: var(--freya_black);
+    width: 100%;
+    background-color: inherit;
+    text-align: center;
+    border-radius: 10px;
+	box-shadow:1px 1px 5px 1px #ccc;
+}
+
+.card-header.liveData {
+	background-color: var(--freya_light_green);
+	color: inherit;
+	font-size: 1.2rem;
+}
+
+.card-title.liveData {
+    color: var(--freya_black);
+	font-size: 3.5rem;
+    padding: 0.7rem;
+}
+
+.card-text.liveData {
+	font-size: 1.8rem;
+    font-weight: bold;
+}
+
+/* for mobile */
+@media (max-width: 768px) {
+    .card-text.liveData {
+        font-size: 1.2rem;
+    }
+}
+
+.card-footer.liveData {
+	text-align: right;
+}
