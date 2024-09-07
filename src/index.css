@@ -9,6 +9,18 @@
   --freya_black: #292d2b;
 }
 
+.App {
+  height: 100vh;
+  background-image: url("../public/Dendrobates.png");
+  background-repeat: no-repeat;
+  background-position: bottom left;
+  background-size: 20%;
+}
+
+h1,h2,h3,h4 {
+  color: var(-- --freya_black);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -46,4 +58,6 @@ code {
   background-color: red;
 }
 
-
+.subtext {
+  color: var(--freya_dark_grey);
+}

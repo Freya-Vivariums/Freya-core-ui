@@ -19,15 +19,8 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
         setStartDate(setDateFromTime( props.data.startHours, props.data.startMinutes ));
         // initialize TEMPERATURE range
         setTemperatureRange( [props.data.temperature.minimum, props.data.temperature.maximum] );
-        // initialize LIGHTS (TODO: UV!)
-        if( props.data.lighting.maximum >= 50){
-            setDaylightLights( true );          // initialize Daylight
-            setUvLights( true );                // initialize UV
-        }
-        else {
-            setDaylightLights( false );          // initialize Daylight
-            setUvLights( false );                // initialize UV
-        }
+        // initialize LIGHTS
+        setLightingRange( [props.data.lighting.minimum, props.data.lighting.maximum] );
         // initialize HUMIDITY range
         setHumidityRange( [props.data.humidity.minimum, props.data.humidity.maximum] );
         // TODO initialize RAIN timings
@@ -40,16 +33,6 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
     useEffect(()=>{
         let minLightIntensity=0;
         let maxLightIntensity=0;
-
-        // Convert Lighting settings
-        if( daylightLights ){
-            minLightIntensity = 55;
-            maxLightIntensity = 100;
-        }
-        else{
-            minLightIntensity = 0;
-            maxLightIntensity = 45;
-        }
 
         // Create the new TimeOfDay Object
         const newTimeOfDaySettings:any = {
@@ -129,20 +112,13 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
         setHumidityRange( value )
     };
 
-    // Switch Lights - Daylight
-    const[ daylightLights, setDaylightLights ] = useState<boolean>(false);
-    const handleDaylightChange = ( event:any, checked:boolean ) => {
-        setDaylightLights( checked );
-    }
-    
-    const Daylight = () =>{
-        if( daylightLights ){
-            return <>on</>;
-        }
-        else{
-            return <>off</>;
-        }
-    }
+
+    // range slider Lighting
+    const[ lightingRange, setLightingRange ] = useState<number | number[]>([]);
+
+    const handleLightingChange = ( event: Event, value: number | number[], activeThumb: number) => {
+        setLightingRange( value )
+    };
 
     // Switch Lights - UV
     const[ uvLights, setUvLights ] = useState<boolean>(false);
@@ -162,7 +138,7 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
     return(
         <>
             <h3>{name}</h3>
-            <p>{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong>and ends <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
+            <p className="subtext">{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong> and ends <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
                     ampm={false}
@@ -174,7 +150,7 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
             </LocalizationProvider>
             <br /><br />
             <h4><FontAwesomeIcon icon={faThermometerHalf} /> Temperature</h4>
-            <p>The temperature ranges between <strong>{(temperatureRange as number[])[0]}&deg;C</strong> and <strong>{(temperatureRange as number[])[1]}&deg;C</strong>.</p>
+            <p className="subtext">The temperature ranges between <strong>{(temperatureRange as number[])[0]}&deg;C</strong> and <strong>{(temperatureRange as number[])[1]}&deg;C</strong>.</p>
             <Slider
                 getAriaLabel={() => 'Temperature range'}
                 value={temperatureRange}
@@ -189,22 +165,20 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
                 />
             <hr />
             <h4><FontAwesomeIcon icon={faSun} /> Lights</h4>
-            <p>Daylights are turned <strong><Daylight /></strong>, and UV lights are turned <strong><Uvlight /></strong>.</p>
-            <FormGroup>
-                <FormControlLabel control={<Switch
-                    checked={daylightLights}
-                    onChange={handleDaylightChange}
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                    />} label="Daylight" />
-                <FormControlLabel control={<Switch 
-                    checked={uvLights}
-                    onChange={handleUvlightChange}
-                    inputProps={{ 'aria-label': 'secondary checkbox' }}
-                />} label="UV" />
-            </FormGroup>
+            <p className="subtext">The lighting ranges between <strong>{(lightingRange as number[])[0]}%</strong> and <strong>{(lightingRange as number[])[1]}%</strong>.</p>
+            <Slider
+                getAriaLabel={() => 'Light intensity range'}
+                value={lightingRange}
+                onChange={handleLightingChange}
+                valueLabelDisplay="auto"
+                    sx={{
+                    maxWidth: 500,
+                    color: 'var(--freya_light_green)'
+                  }}
+            />
             <hr />
             <h4><FontAwesomeIcon icon={faSmog} /> Humidity</h4>
-            <p>The humidity ranges between <strong>{(humidityRange as number[])[0]}%</strong> and <strong>{(humidityRange as number[])[1]}%</strong>.</p>
+            <p className="subtext">The humidity ranges between <strong>{(humidityRange as number[])[0]}%</strong> and <strong>{(humidityRange as number[])[1]}%</strong>.</p>
             <Slider
                 getAriaLabel={() => 'Humidity range'}
                 value={humidityRange}
@@ -217,7 +191,7 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
             />
             <hr />
             <h4><FontAwesomeIcon icon={faCloudRain} /> Rain</h4>
-            <p>It will rain every <strong>{rainInterval} minutes</strong> for <strong>{rainDuration} seconds</strong>.</p>
+            <p className="subtext">It will rain every <strong>{rainInterval} minutes</strong> for <strong>{rainDuration} seconds</strong>.</p>
             <input type="number" name="rainInterval" min={0} onChange={handleRainIntervalChange} value={String(rainInterval)}></input> minutes<br/>
             <input type="number" name="rainDuration" min={0} onChange={handleRainDurationChange} value={String(rainDuration)}></input> seconds
         </>
