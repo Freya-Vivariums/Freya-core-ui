@@ -26,19 +26,22 @@ const Home = ()=>{
     }
     return(
         <Container>
-            <Tabs defaultActiveKey="data" className="mb-3">
-                <Tab title={<><FontAwesomeIcon icon={faChartLine}/> Data</>} eventKey={"data"}>
+            <Tabs className={"freya-tabs mb-3"} defaultActiveKey="monitor">
+                <Tab title={<><FontAwesomeIcon icon={faChartLine}/> Monitor</>} eventKey={"monitor"}>
                     <VivariumData id="blub" vivariumSocket={{}} />
                 </Tab>
                 <Tab title={<><FontAwesomeIcon icon={faCogs}/> Settings</>} eventKey={"settings"}>
                     <Row>
                         <Col>
-                            <ClimateSettingsItem data={data} setSettings={()=>{}} />   
+                            <ClimateSettingsItem data={data} setSettings={()=>{}} />
                         </Col>
                         <Col>
-                            <ClimateSettingsItem data={data} setSettings={()=>{}} />   
+                            <ClimateSettingsItem data={data} setSettings={()=>{}} />
                         </Col>
                     </Row>
+                    <hr/>
+                    <Button variant="danger" className="mb-3">Reset</Button>&nbsp;
+                    <Button variant="primary" className="mb-3">Save</Button>
                 </Tab>
             </Tabs>
         </Container>

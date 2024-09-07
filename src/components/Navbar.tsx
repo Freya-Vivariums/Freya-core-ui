@@ -5,7 +5,7 @@ const NavigationBar = ()=>{
         <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
             <Container>
                 <Navbar.Brand href='/'>
-                    <img src={'/logo.png'} alt="Freya logo" height={'32px'}/>&nbsp;
+                    <img src={'/Freya-logo.png'} alt="Freya logo" height={'32px'}/>&nbsp;
                 </Navbar.Brand>
             </Container>
         </Navbar>

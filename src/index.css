@@ -13,8 +13,8 @@
   height: 100vh;
   background-image: url("../public/Dendrobates.png");
   background-repeat: no-repeat;
-  background-position: bottom left;
-  background-size: 20%;
+  background-position: bottom right;
+  background-size: 27vh;
 }
 
 h1,h2,h3,h4 {
@@ -60,4 +60,12 @@ code {
 
 .subtext {
   color: var(--freya_dark_grey);
+}
+
+.freya-tabs .nav-link {
+  color: var(--freya_dark_grey); /* Non-active tab color */
+}
+
+.freya-tabs .nav-link.active {
+  color: var(--freya_dark_green); /* Active tab color */
 }
