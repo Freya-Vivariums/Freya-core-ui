@@ -44,9 +44,18 @@ const ClimateSettings = ()=>{
         }
     });
 
+
     // User feedback message
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
+
+    // Disappearing messages
+    useEffect(()=>{
+        setTimeout(()=>{
+            setMessage('');
+            setIsError(false);
+        },2500);
+    },[message])
 
     useEffect(()=>{
         getSettings();
