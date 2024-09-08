@@ -1,17 +1,27 @@
 import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudRain, faSmog, faSun, faThermometerHalf } from '@fortawesome/free-solid-svg-icons';
-import {Slider, FormGroup, FormControlLabel, Switch } from '@mui/material';
+import { Slider } from '@mui/material';
 import { LocalizationProvider, TimePicker } from '@mui/lab';
 import TextField from '@mui/material/TextField';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-//import { TimeOfDayObject } from '../../utilities/climate';
 
 
-const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
+const ClimateSettingsItem = (props:{data:any|null, onChange?:Function }) => {
+    // Name
+    const[ name, setName ] = useState('');
+    // Start Time
+    const[ startTime, setStartTime ] = useState<number[]>([]);      // HH:mm
+    const[ startDate, setStartDate ] = useState<Date>();
+    const[ humidityRange, setHumidityRange ] = useState<number | number[]>([]);
+    // range slider info: https://mui.com/api/slider-unstyled/
+    const[ temperatureRange, setTemperatureRange ] = useState<number | number[]>([]);
+    const[ rainInterval, setRainInterval ] = useState<number>(0);
+    const[ rainDuration, setRainDuration ] = useState<number>(0);
 
     // on initialization, preload all settings fields
     useEffect(()=>{
+        if(!props.data) return;
         // set the NAME
         setName(props.data.name);
         // TODO: initialize START TIME
@@ -27,7 +37,7 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
         setRainInterval(props.data.humidity.rainInterval);
         setRainDuration(props.data.humidity.rainDuration);
 
-    },[]);
+    },[props.data]);
 
     // on every change, update the full object
     useEffect(()=>{
@@ -36,41 +46,34 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
 
         // Create the new TimeOfDay Object
         const newTimeOfDaySettings:any = {
-            uuid: props.data.uuid,                  // UUID
+            //uuid: props.data.uuid,                  // UUID
             name: name,                             // name of this time of day
             startHours: startTime[0],               // starttime hours
             startMinutes: startTime[1],             // starttime minutes
             endHours: 0,                     // TODO: calculate endtime hours
             endMinutes: 0,                   // TODO: calculate endtime minutes
             lighting: {
-                minIntensity: minLightIntensity,    // minimum light intensity in %
-                maxIntensity: maxLightIntensity     // maximum light intensity in %
+                minimum: minLightIntensity,    // minimum light intensity in %
+                maximum: maxLightIntensity     // maximum light intensity in %
             },
             temperature: {
-                minTemperature: (temperatureRange as number[])[0],     // minimum temperature in deg. Celcius
-                maxTemperature: (temperatureRange as number[])[1]      // maximum temperature in deg. Celcius
+                minimum: (temperatureRange as number[])[0],     // minimum temperature in deg. Celcius
+                maximum: (temperatureRange as number[])[1]      // maximum temperature in deg. Celcius
             },
             humidity: {
-                minRHumidity: (humidityRange as number[])[0],   // minimum relative humidity in %
-                maxRHumidity: (humidityRange as number[])[1],   // maximum relative humidity in %
+                minimum: (humidityRange as number[])[0],   // minimum relative humidity in %
+                maximum: (humidityRange as number[])[1],   // maximum relative humidity in %
                 rainInterval: rainInterval,         // interval in minutes
                 rainDuration: rainDuration          // duration in seconds
             }
         }
         
         if(typeof props.onChange === 'function') props.onChange(newTimeOfDaySettings);
-    });
+    },[name, humidityRange, temperatureRange, rainInterval, rainDuration]);
 
     /*  
      *  Settings components logic
      */
-
-    // Name
-    const[ name, setName ] = useState('');
-
-    // Start Time
-    const[ startTime, setStartTime ] = useState<number[]>([]);      // HH:mm
-    const[ startDate, setStartDate ] = useState<Date>();
 
     const changeTimeHandler = ( value:any ) =>{
         var date = new Date();
@@ -86,9 +89,6 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
     }
 
     // Rain interval & duration
-    const[ rainInterval, setRainInterval ] = useState<number>(0);
-    const[ rainDuration, setRainDuration ] = useState<number>(0);
-
     const handleRainIntervalChange = ( event:React.FormEvent<HTMLInputElement>) => {
         setRainInterval(parseInt(event.currentTarget.value));
     }
@@ -98,16 +98,11 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
     }
 
     // range slider Temperature
-    // range slider info: https://mui.com/api/slider-unstyled/
-    const[ temperatureRange, setTemperatureRange ] = useState<number | number[]>([]);
-
     const handleTemperatureChange = ( event: Event, value: number | number[], activeThumb: number) => {
         setTemperatureRange( value )
     };
 
     // range slider Humidity
-    const[ humidityRange, setHumidityRange ] = useState<number | number[]>([]);
-
     const handleHumidityChange = ( event: Event, value: number | number[], activeThumb: number) => {
         setHumidityRange( value )
     };
@@ -123,8 +118,8 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
     return(
         <>
             <h3>{name}</h3>
-            <p className="subtext">{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong> and ends at <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
-            <LocalizationProvider dateAdapter={AdapterDateFns}>
+            {/*<p className="subtext">{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong> and ends at <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
+             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
                     ampm={false}
                     label=''
@@ -132,7 +127,7 @@ const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
                     onChange={ changeTimeHandler }
                     renderInput={(params:any) => <TextField {...params} />}
                 />
-            </LocalizationProvider>
+            </LocalizationProvider> */}
             <br /><br />
             <h4><FontAwesomeIcon icon={faThermometerHalf} /> Temperature</h4>
             <p className="subtext">The temperature ranges between <strong>{(temperatureRange as number[])[0]}&deg;C</strong> and <strong>{(temperatureRange as number[])[1]}&deg;C</strong>.</p>

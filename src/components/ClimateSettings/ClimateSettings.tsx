@@ -5,46 +5,9 @@ import NotificationBox from "../Notification";
 import { api_settings_getSettings, api_settings_updateSettings } from "../../api/settings";
 
 const ClimateSettings = ()=>{
-    const[ daySettings, setDaySettings ] = useState<any>({
-        name: 'Day',
-        startHours: 11,
-        startMinutes: 13,
-        temperature:{
-            minimum: 20,
-            maximum: 30
-        },
-        humidity:{
-            minimum: 45,
-            maximum: 55,
-            rainInterval: 30,
-            rainDuration: 5
-        },
-        lighting:{
-            minimum: 75,
-            maximum: 100
-        }
-    })
-    const[ nightSettings, setNightSettings ] = useState<any>({
-        name: 'Night',
-        startHours: 22,
-        startMinutes: 16,
-        temperature:{
-            minimum: 20,
-            maximum: 30
-        },
-        humidity:{
-            minimum: 45,
-            maximum: 55,
-            rainInterval: 30,
-            rainDuration: 5
-        },
-        lighting:{
-            minimum: 0,
-            maximum: 10
-        }
-    });
-
-
+    const[ settings, setSettings ] = useState<any[]>([]);
+    const[ daySettings, setDaySettings ] = useState<any|null>(null);
+    const[ nightSettings, setNightSettings ] = useState<any|null>(null);
     // User feedback message
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
@@ -69,6 +32,10 @@ const ClimateSettings = ()=>{
             setMessage(result.message);
             return;
         }
+        setSettings(result);
+        console.log(result);
+        setDaySettings(result[0].dayCycle[0]);
+        setNightSettings(result[0].dayCycle[1]);
         setIsError(false);
         setMessage("Successfully got the settings!");
     }
@@ -90,10 +57,10 @@ const ClimateSettings = ()=>{
         <Container>
             <Row>
                 <Col>
-                    <ClimateSettingsItem data={daySettings} onChange={(settings:any)=>{setDaySettings(settings)}} />
+                    <ClimateSettingsItem data={daySettings} onChange={(settings:any)=>{/*setDaySettings(settings)*/}} />
                 </Col>
                 <Col>
-                    <ClimateSettingsItem data={nightSettings} onChange={(settings:any)=>{setNightSettings(settings)}} />
+                    <ClimateSettingsItem data={nightSettings} onChange={(settings:any)=>{/*setNightSettings(settings)*/}} />
                 </Col>
             </Row>
             <hr/>
