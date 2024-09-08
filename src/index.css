@@ -76,6 +76,13 @@ code {
 .freya-tabs .nav-link.active {
   color: var(--freya_dark_green); /* Active tab color */
 }
+.freya-tabs .nav-link:disabled {
+  color: var(--freya_light_grey); /* Non-active tab color */
+}
+
+.freya-tabs .nav-link.active {
+  color: var(--freya_dark_green); /* Active tab color */
+}
 
 /* Signin form */
 .form-signin {
