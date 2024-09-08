@@ -1,7 +1,7 @@
 import { Alert, Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './VivariumData.css';
-import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import { faGlobeAmericas, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 const ScheduleMonitor = ( ) => {
 
@@ -13,7 +13,7 @@ const ScheduleMonitor = ( ) => {
                   <Card.Body className="liveData" style={{height:'192px'}}>
                     <Row>
                       <Col xs={3}>
-                        <Card.Title className="liveData"><FontAwesomeIcon icon={faCalendar} /></Card.Title>
+                        <Card.Title className="liveData"><FontAwesomeIcon icon={faGlobeAmericas} /></Card.Title>
                         <Card.Text className="liveData">Day</Card.Text>
                       </Col>
                       <Col xs={9}>
