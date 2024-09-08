@@ -19,12 +19,13 @@
 }
 
 .card-title.liveData {
-    color: var(--freya_black);
+    color: var(--freya_darker_grey);
 	font-size: 3.5rem;
     padding: 0.7rem;
 }
 
 .card-text.liveData {
+    color: var(--freya_darker_grey);
 	font-size: 1.8rem;
     font-weight: bold;
 }

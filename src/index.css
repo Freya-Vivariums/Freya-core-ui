@@ -4,6 +4,7 @@
   --freya_light_green: #A2CA6F;
   --freya_dark_blue: #00A29A;
   --freya_light_blue: #92D4F2;
+  --freya_darker_grey: #4F4F4F;
   --freya_dark_grey: #6D7279;
   --freya_light_grey: #e1e2e4;
   --freya_black: #292d2b;
@@ -18,7 +19,7 @@
 }
 
 h1,h2,h3,h4 {
-  color: var(-- --freya_black);
+  color: var(--freya_darker_grey);
 }
 
 body {
@@ -50,7 +51,18 @@ code {
   background-color: var(--freya_dark_green);
   border-color: var(--freya_light_green);
   box-shadow: 0 0px 0px var(--freya_dark_green) inset, 0,0,3px var(--freya_light_green);
+}
 
+.btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+  background-color: var(--freya_dark_grey);
+  border-color: var(--freya_darker_grey);
+  box-shadow: 0 0px 0px var(--freya_light_grey) inset, 0,0,0px var(--freya_light_grey);
+}
+
+.btn-secondary:hover {
+  background-color: var(--freya_darker_grey);
+  border-color: var(--freya_dark_grey);
+  box-shadow: 0 0px 0px var(--freya_dark_grey) inset, 0,0,3px var(--freya_dark_grey);
 }
 
 .subtext {
@@ -58,7 +70,7 @@ code {
 }
 
 .freya-tabs .nav-link {
-  color: var(--freya_dark_grey); /* Non-active tab color */
+  color: var(--freya_darker_grey); /* Non-active tab color */
 }
 
 .freya-tabs .nav-link.active {
