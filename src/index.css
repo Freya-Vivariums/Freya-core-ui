@@ -91,3 +91,10 @@ code {
   padding: 15px;
   margin: auto;
 }
+
+/* Freya styled success alert*/
+.alert-success {
+  background-color: inherit !important;
+  color: var(--freya_dark_green) !important;
+  border-color: var(--freya_dark_green) !important;
+}
