@@ -33,11 +33,8 @@ const ClimateSettings = ()=>{
             return;
         }
         setSettings(result);
-        console.log(result);
         setDaySettings(result[0].dayCycle[0]);
         setNightSettings(result[0].dayCycle[1]);
-        setIsError(false);
-        setMessage("Successfully got the settings!");
     }
 
     // Update the settings
