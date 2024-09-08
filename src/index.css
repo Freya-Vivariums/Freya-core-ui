@@ -53,11 +53,6 @@ code {
 
 }
 
-/* Danger button */
-.btn-danger, .btn-danger:active, .btn-danger:visited {
-  background-color: red;
-}
-
 .subtext {
   color: var(--freya_dark_grey);
 }
@@ -68,4 +63,12 @@ code {
 
 .freya-tabs .nav-link.active {
   color: var(--freya_dark_green); /* Active tab color */
+}
+
+/* Signin form */
+.form-signin {
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin: auto;
 }

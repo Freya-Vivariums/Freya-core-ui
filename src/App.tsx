@@ -23,6 +23,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import NavigationBar from './components/Navbar';
+import Login from './pages/Login';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         <br/>
         <Routes>
           <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login user={null} onLogin={()=>{}}/>} />
         </Routes>
       </BrowserRouter>
     </div>
