@@ -71,7 +71,6 @@ const VivariumDataChart = forwardRef( (props:{ id:string, type:string}, ref )  =
               dataKey="mean_min"
               strokeWidth={0.3}
               stroke="var(--freya_black)"
-              //stroke="var(--freya_light_green)"
               dot={false}
               isAnimationActive={false}
             />
@@ -81,7 +80,6 @@ const VivariumDataChart = forwardRef( (props:{ id:string, type:string}, ref )  =
               dataKey="mean_max"
               strokeWidth={0.3}
               stroke="var(--freya_black)"
-              //stroke="var(--freya_light_green)"
               dot={false}
               isAnimationActive={false}
             />
@@ -90,7 +88,6 @@ const VivariumDataChart = forwardRef( (props:{ id:string, type:string}, ref )  =
               type="monotone"
               dataKey="mean_value"
               strokeWidth={3}
-              //stroke="var(--freya_black)"
               stroke="var(--freya_light_green)"
               dot={false}
               isAnimationActive={false}

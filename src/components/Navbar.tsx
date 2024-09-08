@@ -12,7 +12,7 @@ const NavigationBar = ()=>{
                 <Navbar.Toggle />
                 <Navbar.Collapse>
                     <Nav.Link onClick={()=>{}} style={{ cursor: 'pointer', color:'var(--freya_light_grey)' }} className="ms-auto">
-                        <FontAwesomeIcon icon={faSignOut} />
+                        <FontAwesomeIcon icon={faSignOut} /> Exit
                     </Nav.Link>
                 </Navbar.Collapse>
             </Container>

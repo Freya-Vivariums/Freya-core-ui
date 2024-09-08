@@ -8,7 +8,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 //import { TimeOfDayObject } from '../../utilities/climate';
 
 
-const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void }) => {
+const ClimateSettingsItem = (props:{data:any, onChange?:Function }) => {
 
     // on initialization, preload all settings fields
     useEffect(()=>{
@@ -57,8 +57,8 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
                 rainDuration: rainDuration          // duration in seconds
             }
         }
-        //console.log(newTimeOfDaySettings);
-        props.setSettings(newTimeOfDaySettings);
+        
+        if(typeof props.onChange === 'function') props.onChange(newTimeOfDaySettings);
     });
 
     /*  
@@ -120,25 +120,10 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
         setLightingRange( value )
     };
 
-    // Switch Lights - UV
-    const[ uvLights, setUvLights ] = useState<boolean>(false);
-    const handleUvlightChange = ( event:any, checked:boolean ) => {
-        setUvLights( checked );
-    }
-
-    const Uvlight = () =>{
-        if( uvLights ){
-            return <>on</>;
-        }
-        else{
-            return <>off</>;
-        }
-    }
-
     return(
         <>
             <h3>{name}</h3>
-            <p className="subtext">{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong> and ends <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
+            <p className="subtext">{name} starts at <strong>{startTime[0]}:{startTime[1]}</strong> and ends at <strong>{props.data.endHours}:{props.data.endMinutes}</strong>.</p>
             <LocalizationProvider dateAdapter={AdapterDateFns}>
                 <TimePicker
                     ampm={false}
@@ -191,7 +176,8 @@ const ClimateSettingsItem = (props:{data:any, setSettings:( settings:any)=>void 
             />
             <hr />
             <h4><FontAwesomeIcon icon={faCloudRain} /> Rain</h4>
-            <p className="subtext">It will rain every <strong>{rainInterval} minutes</strong> for <strong>{rainDuration} seconds</strong>.</p>
+            {rainDuration>0?<p className="subtext">It will rain every <strong>{rainInterval} minutes</strong> for <strong>{rainDuration} seconds</strong>.</p>:
+            <p className="subtext">Rain is <strong>disabled</strong>.</p>}
             <input type="number" name="rainInterval" min={0} onChange={handleRainIntervalChange} value={String(rainInterval)}></input> minutes<br/>
             <input type="number" name="rainDuration" min={0} onChange={handleRainDurationChange} value={String(rainDuration)}></input> seconds
         </>
