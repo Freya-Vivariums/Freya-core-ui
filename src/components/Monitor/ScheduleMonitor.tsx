@@ -1,10 +1,9 @@
-import { Component } from 'react';
 import { Alert, Card, Col, Row } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './VivariumData.css';
 import { faCalendar, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
-const ScheduleMonitor = ( props:{} ) => {
+const ScheduleMonitor = ( ) => {
 
   return (
           <>
@@ -23,7 +22,7 @@ const ScheduleMonitor = ( props:{} ) => {
                     </Row>
                   </Card.Body>
                   <Card.Footer className="liveData">
-                    Some status
+                    &nbsp;
                   </Card.Footer>
                 </Card>
               </div>
