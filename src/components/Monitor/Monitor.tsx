@@ -3,6 +3,7 @@ import './VivariumData.css';
 import VariableMonitor from './VariableMonitor';
 import { useEffect, useState } from 'react';
 import ScheduleMonitor from './ScheduleMonitor';
+import { api_monitor_getHumidity, api_monitor_getLighting, api_monitor_getTemperature } from '../../api/monitor';
 
 const Monitor = () => {
   // Monitor graph data
@@ -22,32 +23,32 @@ const Monitor = () => {
 
   // Get the Temperature data
   async function getTemperatureData(){
-    setTemperature([
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:25.9},
-      {min:25, max:30, value:26.4},
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:24.9}]);
+    const result = await api_monitor_getTemperature();
+    if( result.message ){
+      setTemperatureStatus("Could not get data");
+      return;
+    }
+    setTemperature(result);
   }
 
   // Get the Humidity data
   async function getHumidityData(){
-    setHumidity([
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:25.9},
-      {min:25, max:30, value:26.4},
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:24.9}]);
+    const result = await api_monitor_getHumidity();
+    if( result.message ){
+      setHumidityStatus("Could not get data");
+      return;
+    }
+    setHumidity(result);
   }
 
   // Get the Lighting data
   async function getLightingData(){
-    /*setLighting([
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:25.9},
-      {min:25, max:30, value:26.4},
-      {min:25, max:30, value:25.1},
-      {min:25, max:30, value:24.9}]);*/
+    const result = await api_monitor_getLighting();
+    if( result.message ){
+      setLightingStatus("Could not get data");
+      return;
+    }
+    setLighting(result);
   }
 
   return (
