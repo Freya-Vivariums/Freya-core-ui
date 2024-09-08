@@ -2,6 +2,7 @@ import { faSmog, faSun, faThermometerHalf } from '@fortawesome/free-solid-svg-ic
 import './VivariumData.css';
 import VariableMonitor from './VariableMonitor';
 import { useEffect, useState } from 'react';
+import ScheduleMonitor from './ScheduleMonitor';
 
 const Monitor = () => {
   // Monitor graph data
@@ -51,6 +52,7 @@ const Monitor = () => {
 
   return (
           <>
+            <ScheduleMonitor />
             <VariableMonitor unit='&deg;C' variable='Temperature' icon={faThermometerHalf} status={'All good yo!'} data={temperature}/>
             <VariableMonitor unit='%' variable='Humidity' icon={faSmog} status={'All good yo!'} data={humidity}/>
             <VariableMonitor unit='%' variable='Lighting' icon={faSun} status={'All good yo!'} data={lighting}/>
