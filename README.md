@@ -3,7 +3,7 @@
 The user interface for the [Freya Vivarium Control System Core](https://github.com/Freya-Vivariums/Freya-core) application.
 
 ## License & Collaboration
-**Copyright© 2024 Sanne 'SpuQ' Santens**. This project is licensed under the **[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)**. However, trademark rules apply to the usage of the Freya™ brand.
+**Copyright© 2024 Sanne 'SpuQ' Santens**. This project is licensed under the **[GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html)**. However, [trademark rules](https://github.com/Freya-Vivariums/.github/blob/main/brand/Freya_Trademark_Rules_and_Guidelines.md) apply to the usage of the Freya™ brand.
 
 ### Collaboration
 
