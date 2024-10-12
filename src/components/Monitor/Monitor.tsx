@@ -2,7 +2,7 @@ import { faSmog, faSun, faThermometerHalf } from '@fortawesome/free-solid-svg-ic
 import VariableMonitor from './VariableMonitor';
 import { useEffect, useState } from 'react';
 import ScheduleMonitor from './ScheduleMonitor';
-import { api_monitor_getHumidity, api_monitor_getLighting, api_monitor_getTemperature } from '../../api/monitor';
+import { api_monitor_getHumidity, api_monitor_getHumidityControllerStatus, api_monitor_getLighting, api_monitor_getLightingControllerStatus, api_monitor_getTemperature, api_monitor_getTemperatureControllerStatus } from '../../api/monitor';
 import './VivariumData.css';
 
 const Monitor = () => {
@@ -19,6 +19,10 @@ const Monitor = () => {
     getTemperatureData();
     getHumidityData();
     getLightingData();
+    // Controller status
+    getTemperatureControllerStatus();
+    getHumidityControllerStatus();
+    getLightingControllerStatus();
   },[])
 
   // Get the Temperature data
@@ -49,6 +53,24 @@ const Monitor = () => {
       return;
     }
     setLighting(result);
+  }
+
+  // Get the Temperature controller status
+  async function getTemperatureControllerStatus(){
+    const result = await api_monitor_getTemperatureControllerStatus();
+    setTemperatureStatus(result.message);
+  }
+
+  // Get the Humidity controller status
+  async function getHumidityControllerStatus(){
+    const result = await api_monitor_getHumidityControllerStatus();
+    setHumidityStatus(result.message);
+  }
+
+  // Get the Lighting controller status
+  async function getLightingControllerStatus(){
+    const result = await api_monitor_getLightingControllerStatus();
+    setLightingStatus(result.message);
   }
 
   return (
