@@ -36,6 +36,16 @@ const VivariumDataChart = (props:{ data:any[]}) => {
               dot={false}
               isAnimationActive={false}
             />
+            {/* The target value line */}
+            <Line
+              type="monotone"
+              dataKey="target"
+              strokeWidth={2}
+              stroke="var(--freya_darker_grey)"
+              dot={false}
+              isAnimationActive={false}
+            />
+
             {/* The actual data line */}
             <Line
               type="monotone"
