@@ -56,7 +56,7 @@ const VivariumDataChart = (props:{ data:any[]}) => {
             />
 
             <YAxis
-              dataKey='value'
+              //dataKey='value'
               //domain = {['auto', 'auto']}
               domain = {[ 'dataMin - 10', 'dataMax +10' ]}
               name='Value'
